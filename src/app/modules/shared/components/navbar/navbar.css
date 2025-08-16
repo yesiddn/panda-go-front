@@ -1,0 +1,10 @@
+/* Small navbar tweaks; most styling is via Tailwind */
+nav {
+  /* ensure nav sits above page content when using backdrop blur */
+  z-index: 50;
+}
+
+/* Avatar placeholder fallback */
+img[alt="avatar"] {
+  background: linear-gradient(135deg, #eef2ff, #e6fffa);
+}

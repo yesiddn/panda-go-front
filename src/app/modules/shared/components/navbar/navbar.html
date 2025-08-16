@@ -1,0 +1,45 @@
+<nav class="bg-white/90 backdrop-blur-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex h-14 items-center justify-between">
+      <!-- Left: logo -->
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-3" routerLink="/">
+          <div class="w-7 h-7 bg-green-600 rounded-sm flex items-center justify-center text-white font-bold">E</div>
+          <span class="text-lg font-semibold text-zinc-900">EcoRecollect</span>
+        </a>
+      </div>
+
+      <!-- Center: nav links -->
+      <div class="hidden md:flex items-center gap-6 text-sm text-zinc-700">
+        <a routerLink="/" class="hover:text-zinc-900">Inicio</a>
+        <a routerLink="/recolecciones" class="hover:text-zinc-900">Recolecciones</a>
+        <a routerLink="/recompensas" class="hover:text-zinc-900">Recompensas</a>
+        <a routerLink="/perfil" class="hover:text-zinc-900">Perfil</a>
+      </div>
+
+      <!-- Right: actions -->
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center gap-3">
+          <div class="bg-zinc-100 text-zinc-800 px-3 py-1 rounded-full text-sm font-medium">1.200 Puntos</div>
+        </div>
+
+        <!-- Notification bell -->
+        <button class="relative p-2 rounded-full hover:bg-gray-100" aria-label="Notificaciones">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-700" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              d="M10 2a4 4 0 00-4 4v2.586L4.293 11.293A1 1 0 005 13h10a1 1 0 00.707-1.707L14 8.586V6a4 4 0 00-4-4z" />
+            <path d="M9 15a2 2 0 104 0H9z" />
+          </svg>
+          <span class="absolute top-0 right-0 inline-flex h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+        </button>
+
+        <!-- Avatar -->
+        <a routerLink="/perfil" class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full overflow-hidden ring-1 ring-gray-200">
+            <img src="/assets/avatar-placeholder.jpg" alt="avatar" class="w-full h-full object-cover" />
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
