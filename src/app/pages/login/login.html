@@ -1,0 +1,62 @@
+<div class="flex h-full w-full items-center justify-center">
+  <div class="w-2/5 rounded-xl bg-white/10 p-8 shadow-lg ring-1 ring-black/5">
+    <div class="flex flex-col items-center gap-y-6">
+      <div class="text-center">
+        <h1 class="text-3xl font-bold text-zinc-900">Bienvenido a EcoRecollect</h1>
+        <p class="text-sm text-zinc-600">Ingresa tus credenciales para continuar</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex w-full flex-col gap-y-4" novalidate>
+        <div class="flex flex-col gap-y-1">
+          <label for="username" class="text-sm font-medium text-zinc-700">Usuario</label>
+          <input pInputText id="username" type="text" class="w-full" formControlName="username" />
+          <div class="h-4">
+            @if (username?.invalid && (username?.dirty || username?.touched)) {
+            <small class="text-red-500">
+              @if (username?.errors?.['required']) {
+              <span>El usuario es requerido</span>
+              }
+              @if (username?.errors?.['email']) {
+              <span>El usuario no es válido</span>
+              }
+            </small>
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-y-1">
+          <label for="password" class="text-sm font-medium text-zinc-700">Contraseña</label>
+          <p-password inputId="password" [feedback]="false" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }"
+            formControlName="password" />
+          <div class="h-4">
+            @if (password?.invalid && (password?.dirty || password?.touched)) {
+            <small class="text-red-500">
+              @if (password?.errors?.['required']) {
+              <span>La contraseña es requerida</span>
+              }
+              @if (password?.errors?.['minlength']) {
+              <span>La contraseña debe tener al menos 8 caracteres</span>
+              }
+            </small>
+            }
+          </div>
+        </div>
+
+        <p-button label="Iniciar Sesión" type="submit" [style]="{ width: '100%', marginTop: '1rem' }" [disabled]="loginForm.invalid" />
+
+        <div class="h-4 mb-2 flex items-center" aria-live="polite">
+          @if (status === 'error') {
+            <small class="text-red-500">
+              <span>Credenciales incorrectas. Por favor, inténtalo de nuevo.</span>
+            </small>
+          }
+          @if (status === 'loading') {
+            <small class="text-zinc-600">
+              <span>Iniciando sesión...</span>
+            </small>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
