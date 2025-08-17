@@ -57,7 +57,7 @@ export class Login implements OnInit {
     const { username, password } = this.loginForm.value;
     this.authService.login(username, password).subscribe({
       next: (response) => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/app']);
       },
       error: (error) => {
         console.error('Login failed:', error);
