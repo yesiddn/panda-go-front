@@ -10,7 +10,7 @@
       </div>
 
       <!-- Center: nav links -->
-      <div class="hidden md:flex items-center gap-6 text-sm text-zinc-700">
+      <div *ngIf="isLoggedIn" class="hidden md:flex items-center gap-6 text-sm text-zinc-700">
         <a routerLink="/" class="hover:text-zinc-900">Inicio</a>
         <a routerLink="/recolecciones" class="hover:text-zinc-900">Recolecciones</a>
         <a routerLink="/recompensas" class="hover:text-zinc-900">Recompensas</a>
@@ -18,7 +18,7 @@
       </div>
 
       <!-- Right: actions -->
-      <div class="flex items-center gap-4">
+      <div *ngIf="isLoggedIn" class="flex items-center gap-4">
         <div class="hidden sm:flex items-center gap-3">
           <div class="bg-zinc-100 text-zinc-800 px-3 py-1 rounded-full text-sm font-medium">1.200 Puntos</div>
         </div>
@@ -40,6 +40,22 @@
           </div>
         </a>
       </div>
+
+      <!-- Buttons for non-logged in users -->
+      @if (!isLoggedIn) {
+          <div class="flex items-center gap-4">
+            @if (!isLoginPage) {
+              <a routerLink="/login" pButton>
+                <span pButtonLabel>Iniciar Sesión</span>
+              </a>
+            }
+            @if (isLoginPage) {
+              <a routerLink="/register" pButton>
+                <span pButtonLabel>Registrarse</span>
+              </a>
+            }
+          </div>
+        }
     </div>
   </div>
 </nav>
