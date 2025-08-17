@@ -25,8 +25,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/@primeuix/themes/aura/light/blue/theme.css"
+              "src/styles.css"
             ]
           },
           "configurations": {
@@ -89,8 +88,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/@primeuix/themes/lara/light/blue/theme.css"
+              "src/styles.css"
             ]
           }
         }
