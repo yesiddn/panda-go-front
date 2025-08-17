@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ResponseLogin } from '../models/auth.model';
+import { RegisterResponse, ResponseLogin } from '../models/auth.model';
+import { RegisterRequest } from '../models/auth.model';
 import { Token } from './token';
 import { environment } from '../../environments/environment';
 import { tap } from 'rxjs';
@@ -29,5 +30,15 @@ export class Auth {
         }
       })
     );
+  }
+
+  register(payload: RegisterRequest) {
+    // Ensure locality_id is a primitive id when sending to backend
+    const body = {
+      ...payload,
+      locality_id: payload.locality_id && typeof payload.locality_id === 'object' ? (payload.locality_id as any).id : payload.locality_id
+    };
+
+    return this.http.post<RegisterResponse>(`${this.apiURL}/register/`, body);
   }
 }
