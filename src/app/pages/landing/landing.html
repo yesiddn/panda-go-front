@@ -1,0 +1,76 @@
+<div class="bg-white w-full min-h-screen">
+  <header class="border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a routerLink="/" class="flex items-center gap-3">
+        <img src="http://localhost:3845/assets/584142ed1512a400783b72e97722c1531934d736.svg" alt="logo"
+          class="w-8 h-8" />
+        <span class="text-xl font-bold text-zinc-900">EcoRecollect</span>
+      </a>
+
+      <nav class="hidden md:flex gap-8 items-center text-sm text-zinc-700">
+        <a routerLink="#" class="hover:text-zinc-900">¿Cómo funciona?</a>
+        <a routerLink="#" class="hover:text-zinc-900">Precio</a>
+        <a routerLink="#" class="hover:text-zinc-900">Contáctanos</a>
+        <a routerLink="/register" pButton>
+          <span pButtonLabel>Regístrarse</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <section class="relative rounded-xl overflow-hidden">
+      <div class="bg-gradient-to-r from-black/10 to-black/40 h-[480px] rounded-xl flex items-center justify-center"
+        style="background-image: url('/images/house.png'); background-size: cover; background-position: center;">
+        <div class="text-center text-white max-w-3xl mx-auto px-6">
+          <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-4">Simplify Your Waste Management</h1>
+          <p class="text-lg md:text-xl text-white/90 mb-6">EcoCollect offers a free subscription service for domestic
+            waste collection, making recycling and waste disposal effortless and eco-friendly.</p>
+          <div class="flex items-center justify-center gap-4">
+            <a routerLink="/register" pButton>
+              <span pButtonLabel>Get Started</span>
+            </a>
+            <a routerLink="/register" pButton severity="secondary">
+              <span pButtonLabel>Ver planes</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="bg-white rounded-xl shadow p-6">
+        <img src="/images/family.png" alt=""
+          class="rounded-md h-40 w-full object-cover mb-4" />
+        <h3 class="text-lg font-bold mb-2">Suscripción gratuita</h3>
+        <p class="text-zinc-600">Disfrute de nuestro servicio integral de recogida de residuos sin coste, haciendo la
+          vida sostenible accesible para todos.</p>
+      </article>
+
+      <article class="bg-white rounded-xl shadow p-6">
+        <img src="/images/street.png" alt=""
+          class="rounded-md h-40 w-full object-cover mb-4" />
+        <h3 class="text-lg font-bold mb-2">Prácticas Eco-Friendly</h3>
+        <p class="text-zinc-600">Empleamos las últimas tecnologías y prácticas para minimizar nuestra huella ambiental.
+        </p>
+      </article>
+
+      <article class="bg-white rounded-xl shadow p-6">
+        <img src="/images/planet.png" alt=""
+          class="rounded-md h-40 w-full object-cover mb-4" />
+        <h3 class="text-lg font-bold mb-2">Community Impact</h3>
+        <p class="text-zinc-600">Al elegir EcoRecollect, contribuye a una comunidad más limpia y saludable.</p>
+      </article>
+    </section>
+
+    <section class="mt-16 text-center">
+      <h2 class="text-3xl font-black mb-4">¿Listo para hacer la diferencia?</h2>
+      <p class="text-zinc-700 mb-6 max-w-2xl mx-auto">Regístrate en EcoRecollect hoy y da el primer paso hacia un estilo
+        de vida más sostenible.</p>
+
+      <a routerLink="/register" pButton>
+        <span pButtonLabel>Regístrate ahora</span>
+      </a>
+    </section>
+  </main>
+</div>
