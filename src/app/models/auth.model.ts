@@ -13,6 +13,7 @@ export interface RegisterRequest {
   role?: string;
   // locality_id can be either the numeric id or the full object returned by the autocomplete
   locality_id?: number | { id: number } | null;
+  companyId?: number | null;
 }
 
 export interface RegisterResponse {
