@@ -6,6 +6,7 @@ import { redirectGuard } from './guards/redirect-guard';
 import { authGuard } from './guards/auth-guard';
 import { Register } from './pages/register/register';
 import { RegisterCompany } from './pages/register-company/register-company';
+import DashboardPage from './pages/dashboard/dashboard';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,11 @@ export const routes: Routes = [
     path: 'app',
     component: Layout,
     canActivate: [authGuard],
-    children: []
+    children: [
+      {
+        path: '',
+        component: DashboardPage
+      }
+    ]
   }
 ];
