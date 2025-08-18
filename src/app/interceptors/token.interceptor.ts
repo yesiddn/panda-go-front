@@ -1,11 +1,15 @@
 import {
   HttpContext,
   HttpContextToken,
+  HttpEvent,
+  HttpHandlerFn,
   HttpInterceptorFn,
+  HttpRequest,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Token } from '../services/token';
 import { Auth } from '../services/auth';
+import { Observable, switchMap } from 'rxjs';
 
 // es buena practica crear contextos para los tokens
 const CHECK_TOKEN = new HttpContextToken<boolean>(() => false);
@@ -16,42 +20,53 @@ export function checkToken() {
 }
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
+  // Inyectar todas las dependencias al inicio del interceptor
+  const tokenService = inject(Token);
+  const authService = inject(Auth);
+
   if (req.context.get(CHECK_TOKEN)) {
-    const isValidToken = inject(Token).isValidToken();
+    const isValidToken = tokenService.isValidToken();
     if (isValidToken) {
-      return addToken(req, next);
+      return addToken(req, next, tokenService);
     } else {
-      updateAccessTokenAndRefreshToken(req, next);
+      return updateAccessTokenAndRefreshToken(req, next, tokenService, authService);
     }
   }
   return next(req);
 };
 
-const addToken: HttpInterceptorFn = (req, next) => {
-  const tokenService = inject(Token);
+// Función para agregar token - recibe dependencias como parámetros
+const addToken = (
+  req: HttpRequest<any>,
+  next: HttpHandlerFn,
+  tokenService: Token
+): Observable<HttpEvent<any>> => {
   const accessToken = tokenService.getToken();
 
   if (accessToken) {
-    // se clona el request y se le agrega el header de Authorization
     const authRequest = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${accessToken}`),
     });
     return next(authRequest);
   }
   return next(req);
-}
+};
 
-const updateAccessTokenAndRefreshToken: HttpInterceptorFn = (req, next) => {
-  const tokenService = inject(Token);
+// Función para refrescar token - recibe dependencias como parámetros
+const updateAccessTokenAndRefreshToken = (
+  req: HttpRequest<any>,
+  next: HttpHandlerFn,
+  tokenService: Token,
+  authService: Auth
+): Observable<HttpEvent<any>> => {
   const refreshToken = tokenService.getRefreshToken();
   const isValidRefreshToken = tokenService.isValidRefreshToken();
 
   if (refreshToken && isValidRefreshToken) {
-    const authService = inject(Auth);
-    authService.refreshToken(refreshToken).subscribe({
-      next: (response) => {}
-    });
-    return addToken(req, next);
+    return authService.refreshToken(refreshToken).pipe(
+      switchMap(() => addToken(req, next, tokenService))
+    );
   }
   return next(req);
-}
+};
+
