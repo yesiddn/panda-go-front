@@ -73,7 +73,7 @@ export class Navbar {
           {
             label: 'Administrar rutas',
             icon: 'pi pi-map',
-            routerLink: ['/app/rutas']
+            routerLink: '/app/routes'
           }
         ]
       });
