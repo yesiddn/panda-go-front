@@ -22,24 +22,20 @@
       <!-- Right: actions -->
       @if (isLoggedIn) {
       <div class="flex items-center gap-4">
-        <div class="hidden sm:flex items-center gap-3">
-          <div class="bg-zinc-100 text-zinc-800 px-3 py-1 rounded-full text-sm font-medium">1.200 Puntos</div>
+        <div class="h-10 rounded-[20px] bg-[#ebf0ed] flex items-center justify-center px-4">
+          <span class="text-[14px] font-bold text-[#121714]">1,200 Puntos</span>
         </div>
 
         <!-- Notification bell -->
-        <button class="relative p-2 rounded-full hover:bg-gray-100" aria-label="Notificaciones">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-700" viewBox="0 0 20 20" fill="currentColor">
-            <path
-              d="M10 2a4 4 0 00-4 4v2.586L4.293 11.293A1 1 0 005 13h10a1 1 0 00.707-1.707L14 8.586V6a4 4 0 00-4-4z" />
-            <path d="M9 15a2 2 0 104 0H9z" />
-          </svg>
+        <button class="relative p-2 rounded-full cursor-pointer hover:bg-[#e8f2ed]" type="button" aria-label="Notificaciones">
+          <img src="/icons/bell.svg" alt="bell" class="w-5 h-5" />
           <span class="absolute top-0 right-0 inline-flex h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
         </button>
 
         <!-- Avatar -->
         <a routerLink="/perfil" class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-full overflow-hidden ring-1 ring-gray-200">
-            <img src="/assets/avatar-placeholder.jpg" alt="avatar" class="w-full h-full object-cover" />
+            <img src="/images/profile.png" alt="avatar" class="w-full h-full object-cover" />
           </div>
         </a>
       </div>
