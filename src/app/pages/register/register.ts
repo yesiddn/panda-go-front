@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Locality } from '../../services/locality';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -29,6 +29,7 @@ import { Auth } from '../../services/auth';
 })
 export class Register {
   private fb = inject(FormBuilder);
+  private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private authService = inject(Auth);
   private localityService = inject(Locality);
@@ -37,6 +38,9 @@ export class Register {
   filteredLocalities: LocationInfo[] = [];
   registrationError: string | null = null;
   isRegistering = false;
+  // If true, the user is being registered as an employee of a company
+  isEmployeeRegistration = false;
+  companyId?: number;
 
   registerForm = this.fb.group({
     username: ['', Validators.required],
@@ -60,6 +64,15 @@ export class Register {
   constructor() {
     // preload localities into service cache
     this.localityService.getAll().subscribe((data: LocationInfo[]) => this.localities = data);
+;
+    const params = this.activatedRoute.snapshot.queryParams || {};
+    if (params['isEmployee'] === 'true' || params['isEmployee'] === true) {
+      this.isEmployeeRegistration = true;
+    }
+    if (params['companyId']) {
+      const id = Number(params['companyId']);
+      if (!isNaN(id)) this.companyId = id;
+    }
   }
 
   search(event: any) {
@@ -72,6 +85,10 @@ export class Register {
     }
 
     const payload = this.buildPayload();
+
+    if (this.isEmployeeRegistration) {
+      payload.companyId = this.companyId;
+    }
 
     this.isRegistering = true;
     this.authService.register(payload).subscribe({

@@ -130,11 +130,13 @@
         }
       </div>
 
+      @if (!isEmployeeRegistration) {
       <div class="text-sm text-center">
         <a routerLink="/register-company" class="font-medium text-green-600 hover:text-green-500">
           Registrarse como compañia recolectora
         </a>
       </div>
+      }
     </form>
   </div>
 </div>
