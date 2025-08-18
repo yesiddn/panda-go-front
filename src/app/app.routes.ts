@@ -5,6 +5,7 @@ import { Layout } from './modules/shared/components/layout/layout';
 import { redirectGuard } from './guards/redirect-guard';
 import { authGuard } from './guards/auth-guard';
 import { Register } from './pages/register/register';
+import { RegisterCompany } from './pages/register-company/register-company';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'register',
         component: Register
+      },
+      {
+        path: 'register-company',
+        component: RegisterCompany
       }
     ]
   },
