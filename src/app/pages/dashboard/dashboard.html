@@ -3,7 +3,7 @@
   <section class="w-full">
     <div class="hero flex justify-center flex-col max-w-[1200px] min-h-64 mx-auto px-8 py-6 rounded-2xl">
       <div class="ml-12">
-        <h1 class="text-white text-5xl font-black tracking-[-2px]">Hola, Elena</h1>
+        <h1 class="text-white text-5xl font-black tracking-[-2px]">Hola, {{ userInfo?.first_name || 'Usuario' }}</h1>
         <p class="mt-2 text-white text-base">Bienvenida a tu panel de control. Aquí puedes gestionar tus recolecciones y
           ver tus recompensas.</p>
         <a routerLink="/app" pButton class="mt-10">
