@@ -1,0 +1,44 @@
+<div class="flex flex-col min-h-screen my-8">
+  <section class="w-full">
+    <div class="max-w-[1200px] mx-auto px-4 pt-5 pb-3 flex items-center justify-between">
+      <h2 class="text-[22px] font-bold text-[#121714]">Mis Rutas</h2>
+      <a routerLink="/routes/create" pButton label="Crear Ruta" icon="pi pi-plus" rounded="true"></a>
+    </div>
+  </section>
+
+  <section class="w-full">
+    <div class="max-w-[1200px] mx-auto p-4 space-y-4">
+      @if (!routes || routes.length === 0) {
+      <ng-container>
+        <div class="rounded-xl p-8 flex flex-col items-center justify-center text-center">
+          <img src="/icons/taken.svg" alt="no routes" class="w-36 h-36 mb-6" />
+          <h3 class="text-[#121714] text-lg font-bold mb-2">No hay rutas disponibles</h3>
+          <p class="text-[#618575]">Aún no has creado ninguna ruta. Presiona "Crear Ruta" para comenzar.</p>
+        </div>
+      </ng-container>
+    }
+    @else {
+      <ng-template #routesList>
+        <div class="space-y-4">
+          <div class="rounded-xl p-4 flex gap-4 items-start">
+            @for (route of routes; track $index) {
+              <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+                <img src="/icons/leaf.svg" alt="organic" class="w-6 h-6" />
+              </div>
+              <div class="flex-1">
+                <div class="text-[#618575] text-[14px]">{{ route.status }}</div>
+                <div class="text-[#121714] text-[16px] font-bold">{{ route.route_code }}</div>
+                <div class="text-[#618575] text-[14px]">{{ route.route_date }}</div>
+              </div>
+              <button class="h-8 rounded-2xl bg-[#ebf0ed] flex items-center gap-1 pl-4 pr-2">
+                <span class="text-[14px] font-medium text-[#121714]">Modificar</span>
+                <img src="/icons/pencil.svg" alt="edit" class="w-[18px] h-[18px]" />
+              </button>
+            }
+          </div>
+        </div>
+      </ng-template>
+    }
+    </div>
+  </section>
+</div>
