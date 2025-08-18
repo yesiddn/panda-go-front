@@ -41,4 +41,23 @@ export class Auth {
 
     return this.http.post<RegisterResponse>(`${this.apiURL}/register/`, body);
   }
+
+    refreshToken(refreshToken: string) {
+    return this.http.post<ResponseLogin>(`${this.apiURL}/token/refresh/`, { refreshToken })
+      .pipe(
+        tap({
+          next: (response) => {
+            this.tokenService.saveToken(response.access);
+            this.tokenService.saveRefreshToken(response.refresh);
+          },
+          error: (error) => {
+            console.error('Error during login:', error);
+          },
+          complete: () => {
+            console.log('Login request completed');
+          }
+        })
+      );
+  }
+
 }
