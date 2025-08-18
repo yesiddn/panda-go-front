@@ -8,5 +8,5 @@ export interface Company {
 
 export interface CompanyRequest {
   name: string;
-  waste_categories: number[];
+  waste_category_ids: number[];
 }
