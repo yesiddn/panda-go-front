@@ -44,12 +44,11 @@ export class Auth {
   }
 
   refreshToken(refreshToken: string) {
-    return this.http.post<ResponseLogin>(`${this.apiURL}/token/refresh/`, { refreshToken })
+    return this.http.post<ResponseLogin>(`${this.apiURL}/token/refresh/`, { refresh: refreshToken })
       .pipe(
         tap({
           next: (response) => {
             this.tokenService.saveToken(response.access);
-            this.tokenService.saveRefreshToken(response.refresh);
           },
           error: (error) => {
             console.error('Error during login:', error);
