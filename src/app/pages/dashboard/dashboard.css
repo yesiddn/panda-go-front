@@ -1,0 +1,8 @@
+:host {
+  display: block;
+}
+
+.hero {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url('http://localhost:3845/assets/38df734b8edec914ee2c72b767a467be3efdca5a.png');
+  background-size: cover;
+}
