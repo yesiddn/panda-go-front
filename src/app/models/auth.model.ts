@@ -13,7 +13,7 @@ export interface RegisterRequest {
   role?: string;
   // locality_id can be either the numeric id or the full object returned by the autocomplete
   locality_id?: number | { id: number } | null;
-  companyId?: number | null;
+  company_id?: number | null;
 }
 
 export interface RegisterResponse {
@@ -21,4 +21,15 @@ export interface RegisterResponse {
   email: string;
   first_name: string;
   last_name: string;
+}
+
+export interface UserInfo {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  locality_id: number | null;
+  company_id: number | null;
+  groups: string[];
 }
