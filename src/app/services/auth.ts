@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { RegisterResponse, ResponseLogin } from '../models/auth.model';
+import { RegisterResponse, ResponseLogin, UserInfo } from '../models/auth.model';
 import { RegisterRequest } from '../models/auth.model';
 import { Token } from './token';
 import { environment } from '../../environments/environment';
 import { tap } from 'rxjs';
+import { checkToken } from '../interceptors/token.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,7 @@ export class Auth {
     return this.http.post<RegisterResponse>(`${this.apiURL}/register/`, body);
   }
 
-    refreshToken(refreshToken: string) {
+  refreshToken(refreshToken: string) {
     return this.http.post<ResponseLogin>(`${this.apiURL}/token/refresh/`, { refreshToken })
       .pipe(
         tap({
@@ -60,4 +61,12 @@ export class Auth {
       );
   }
 
+  logout() {
+    this.tokenService.removeToken();
+    this.tokenService.removeRefreshToken();
+  }
+
+  getUserInfo() {
+    return this.http.get<UserInfo>(`${this.apiURL}/me/`, { context: checkToken() });
+  }
 }
