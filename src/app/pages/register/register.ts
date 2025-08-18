@@ -64,10 +64,10 @@ export class Register {
   constructor() {
     // preload localities into service cache
     this.localityService.getAll().subscribe((data: LocationInfo[]) => this.localities = data);
-;
     const params = this.activatedRoute.snapshot.queryParams || {};
     if (params['isEmployee'] === 'true' || params['isEmployee'] === true) {
       this.isEmployeeRegistration = true;
+      this.registerForm.patchValue({ role: 'employee' });
     }
     if (params['companyId']) {
       const id = Number(params['companyId']);
@@ -87,7 +87,7 @@ export class Register {
     const payload = this.buildPayload();
 
     if (this.isEmployeeRegistration) {
-      payload.companyId = this.companyId;
+      payload.company_id = this.companyId;
     }
 
     this.isRegistering = true;
