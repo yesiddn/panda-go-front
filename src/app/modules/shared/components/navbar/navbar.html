@@ -67,7 +67,7 @@
         </button>
 
         <!-- Avatar -->
-        <div>
+        <div class="flex items-center">
           <p-menu #menu [model]="items" [popup]="true" class="flex justify-center" styleClass="w-full md:w-60">
             <ng-template #start>
               <span class="inline-flex items-center gap-1 px-2 py-2">
@@ -137,8 +137,7 @@
               </button>
             </ng-template>
           </p-menu>
-          <button pButton type="button" (click)="menu.toggle($event)"
-            class="avatar-btn"
+          <button type="button" (click)="menu.toggle($event)" class="inline-flex items-center justify-center w-10 h-10 p-0 rounded-full overflow-hidden cursor-pointer"
             aria-label="Abrir menú de usuario">
             <img src="/images/profile.png" alt="avatar" class="w-full h-full object-cover block" />
           </button>

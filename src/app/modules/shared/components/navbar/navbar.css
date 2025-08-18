@@ -9,27 +9,3 @@ img[alt="avatar"] {
   background: linear-gradient(135deg, #eef2ff, #e6fffa);
 }
 
-.avatar-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  border-radius: 9999px;
-  overflow: hidden;
-  background: none;
-  border: none;
-}
-
-.avatar-btn:hover {
-  border: none;
-}
-
-/* asegúrate que la imagen ocupe todo el botón */
-.avatar-btn img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}

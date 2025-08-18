@@ -35,56 +35,64 @@ export class Navbar {
   }
 
   ngOnInit() {
-    this.items = [
-      {
-          separator: true
-      },
-      {
-          label: 'Solicitudes de recolección',
-          items: [
-              {
-                  label: 'New',
-                  icon: 'pi pi-plus',
-              },
-              {
-                  label: 'Search',
-                  icon: 'pi pi-search',
-              }
-          ]
-      },
-      {
-          label: 'Profile',
-          items: [
-              {
-                  label: 'Settings',
-                  icon: 'pi pi-cog',
-              },
-              {
-                  label: 'Messages',
-                  icon: 'pi pi-inbox',
-                  badge: '2'
-              },
-              {
-                  label: 'Logout',
-                  icon: 'pi pi-sign-out',
-                  command: () => this.logout()
-              }
-          ]
-      },
-      {
-          separator: true
-      }
-    ];
+    // build initial menu (without role-specific entries)
+    this.buildMenu();
 
+    // fetch user info and rebuild menu when role is available
     this.auth.getUserInfo().subscribe({
       next: (userInfo) => {
         this.userInfo = userInfo;
-        this.role = userInfo.groups[0];
+        this.role = userInfo.groups && userInfo.groups.length ? userInfo.groups[0] : null;
+        // Rebuild menu to include role-specific items
+        this.buildMenu();
       },
       error: (error) => {
         console.error('Error fetching user info:', error);
       }
     });
+  }
+
+  // Build the menu items; called initially and after userInfo/role is loaded
+  private buildMenu() {
+    const base: MenuItem[] = [
+      { separator: true },
+      {
+        label: 'Solicitudes de recolección',
+        items: [
+          { label: 'New', icon: 'pi pi-plus' },
+          { label: 'Search', icon: 'pi pi-search' }
+        ]
+      }
+    ];
+
+    // If user is employee, add Rutas section right after Solicitudes
+    if (this.role === 'employee') {
+      base.push({
+        label: 'Rutas',
+        items: [
+          {
+            label: 'Administrar rutas',
+            icon: 'pi pi-map',
+            routerLink: ['/app/rutas']
+          }
+        ]
+      });
+    }
+
+    // Profile section always at the end
+    base.push(
+      {
+        label: 'Profile',
+        items: [
+          { label: 'Settings', icon: 'pi pi-cog' },
+          { label: 'Messages', icon: 'pi pi-inbox', badge: '2' },
+          { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() }
+        ]
+      },
+      { separator: true }
+    );
+
+    this.items = base;
   }
 
   logout() {
