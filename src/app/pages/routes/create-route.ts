@@ -15,6 +15,10 @@ import { LocationInfo } from '../../models/location-info.model';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { Select } from 'primeng/select';
 import { WasteCategory } from '../../models/wasteCategories.model';
+import { Companies } from '../../services/companies';
+import { Auth } from '../../services/auth';
+import { UserInfo } from '../../models/auth.model';
+import { Company } from '../../models/company.model';
 
 @Component({
   selector: 'app-create-route',
@@ -35,10 +39,15 @@ import { WasteCategory } from '../../models/wasteCategories.model';
 })
 export class CreateRouteComponent {
   private fb = inject(FormBuilder);
-  private routesService = inject(RoutesService);
-  private wasteCategoriesService = inject(WasteCategoriesService);
-  private localityService = inject(Locality);
+  private readonly routesService = inject(RoutesService);
+  private readonly authService = inject(Auth);
+  private readonly wasteCategoriesService = inject(WasteCategoriesService);
+  private readonly companiesService = inject(Companies);
+  private readonly localityService = inject(Locality);
   public router = inject(Router);
+  private userInfo: UserInfo | undefined;
+  private companyInfo: Company | undefined;
+
 
   wasteCategories: WasteCategory[] = [];
   localities: LocationInfo[] = [];
@@ -62,22 +71,14 @@ export class CreateRouteComponent {
   }
 
   ngOnInit(): void {
-    this.wasteCategoriesService.getAll().subscribe({
-      next: (wasteCategories) => {
-        this.wasteCategories = wasteCategories;
+    this.authService.getUserInfo().subscribe({
+      next: (userInfo) => {
+        this.userInfo = userInfo;
+        this.loadData();
       },
       error: (err) => {
-        console.error('Error loading waste categories', err);
-      }
-    });
-
-    // load localities
-    this.localityService.getAll().subscribe({
-      next: (localities) => {
-        this.localities = localities;
-      },
-      error: (err) => {
-        console.error('Error loading localities', err);
+        console.error('Error loading user info', err);
+        this.router.navigate(['/app']);
       }
     });
 
@@ -94,6 +95,43 @@ export class CreateRouteComponent {
   get waste_category() { return this.form.get('waste_category'); }
   get localityControl() { return this.form.get('locality'); }
 
+  loadData() {
+    if (!this.userInfo?.company_id) {
+      this.router.navigate(['/app']);
+      return;
+    }
+
+    this.companiesService.getById(this.userInfo?.company_id).subscribe({
+      next: (company) => {
+        this.companyInfo = company;
+      },
+      error: (err) => {
+        console.error('Error loading company info', err);
+      }
+    });
+
+
+    this.wasteCategoriesService.getAll().subscribe({
+      next: (wasteCategories) => {
+        this.wasteCategories = wasteCategories.filter(wasteCategory => {
+          return this.companyInfo?.waste_categories?.some(cat => cat.id === wasteCategory.id);
+        });
+      },
+      error: (err) => {
+        console.error('Error loading waste categories', err);
+      }
+    });
+
+    // load localities
+    this.localityService.getAll().subscribe({
+      next: (localities) => {
+        this.localities = localities;
+      },
+      error: (err) => {
+        console.error('Error loading localities', err);
+      }
+    });
+  }
   submit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
