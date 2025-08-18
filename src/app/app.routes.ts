@@ -46,6 +46,10 @@ export const routes: Routes = [
       {
         path: 'routes',
         component: RoutesComponent
+      },
+      {
+        path: 'routes/create',
+        loadComponent: () => import('./pages/routes/create-route').then(m => m.CreateRouteComponent)
       }
     ]
   }
