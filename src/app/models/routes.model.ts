@@ -1,7 +1,6 @@
 export interface RouteRequest {
   route_code: string;
   route_date: string;
-  status: string;
   capacity_stops: number;
   capacity_weight_kg: string;
   start_time: string;
