@@ -4,7 +4,6 @@ import {
   HttpInterceptorFn,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { switchMap } from 'rxjs';
 import { Token } from '../services/token';
 import { Auth } from '../services/auth';
 
@@ -49,10 +48,10 @@ const updateAccessTokenAndRefreshToken: HttpInterceptorFn = (req, next) => {
 
   if (refreshToken && isValidRefreshToken) {
     const authService = inject(Auth);
-    return authService.refreshToken(refreshToken)
-      .pipe(
-        switchMap(() => addToken(req, next))
-      );
+    authService.refreshToken(refreshToken).subscribe({
+      next: (response) => {}
+    });
+    return addToken(req, next);
   }
   return next(req);
 }
