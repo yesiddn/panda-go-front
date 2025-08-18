@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RoutesService } from '../../services/routes';
 import { Route } from '../../models/routes.model';
-import { CommonModule } from '@angular/common';
+import { Tag } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-routes',
   standalone: true,
-  imports: [ButtonModule, RouterLink],
+  imports: [ButtonModule, Tag, RouterLink],
   templateUrl: './routes.html',
   styleUrls: ['./routes.css'],
 })
