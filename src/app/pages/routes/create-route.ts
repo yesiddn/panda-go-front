@@ -149,7 +149,7 @@ export class CreateRouteComponent {
       end_time: raw.end_time ? this.formatTime(raw.end_time) : '',
       notes: raw.notes || '',
       waste_category: raw.waste_category && typeof raw.waste_category === 'object' ? raw.waste_category.id : raw.waste_category,
-      locality: raw.locality && typeof raw.locality === 'object' ? raw.locality.id : raw.locality
+      locality_id: raw.locality && typeof raw.locality === 'object' ? raw.locality.id : raw.locality
     };
     console.log('Creating route with payload:', payload);
     this.routesService.createRoute(payload).subscribe({
