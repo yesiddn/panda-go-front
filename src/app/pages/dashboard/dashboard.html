@@ -39,14 +39,62 @@
     </div>
   </section> -->
 
+  <!-- Sidebar column (achievements + quick actions) mimicked as a stacked section for mobile) -->
+  <aside class="w-full flex gap-8 max-w-[1200px] mx-auto mt-8">
+    <div>
+      <div class="px-4 pt-4 pb-2">
+        <h3 class="text-[18px] font-bold text-[#121714]">Logros Recientes</h3>
+      </div>
+      <div class="h-[72px] flex items-center gap-4 px-4 py-2">
+        <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/cup.svg" alt="badge1" class="w-6 h-6" />
+        </div>
+        <div>
+          <div class="text-[16px] font-medium text-[#121714]">Reciclador Estrella</div>
+          <div class="text-[#618575] text-[14px]">10 kg de papel reciclado</div>
+        </div>
+      </div>
+      <div class="h-[72px] flex items-center gap-4 px-4 py-2">
+        <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/leaf.svg" alt="badge2" class="w-6 h-6" />
+        </div>
+        <div>
+          <div class="text-[16px] font-medium text-[#121714]">Eco-Guerrero</div>
+          <div class="text-[#618575] text-[14px]">5 recolecciones completadas</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="px-4 pt-4 pb-2">
+        <h3 class="text-[18px] font-bold text-[#121714]">Acciones Rápidas</h3>
+      </div>
+      <div class="h-14 flex items-center gap-4 px-4">
+        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/plus-line.svg" alt="quick1" class="w-6 h-6" />
+        </div>
+        <div class="text-[16px] text-[#121714]">Programar Recolección</div>
+      </div>
+      <div class="h-14 flex items-center gap-4 px-4">
+        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/present.svg" alt="quick2" class="w-6 h-6" />
+        </div>
+        <div class="text-[16px] text-[#121714]">Ver Recompensas</div>
+      </div>
+      <div class="h-14 flex items-center gap-4 px-4">
+        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/comunity.svg" alt="quick3" class="w-6 h-6" />
+        </div>
+        <div class="text-[16px] text-[#121714]">Invitar Amigos</div>
+      </div>
+      </div>
+  </aside>
+
   <!-- Upcoming collections header -->
   <section class="w-full">
     <div class="max-w-[1200px] mx-auto px-4 pt-5 pb-3 flex items-center justify-between">
       <h2 class="text-[22px] font-bold text-[#121714]">Próximas Recolecciones</h2>
-      <button class="h-10 rounded-[20px] bg-[#b8e0cf] flex items-center gap-2 px-4">
-        <img src="/icons/plus.svg" alt="plus" class="w-5 h-5" />
-        <span class="text-[14px] font-bold text-[#121714]">Programar</span>
-      </button>
+      <a routerLink="/app/requests/create" pButton label="Crear solicitud" icon="pi pi-plus" rounded="true"></a>
     </div>
   </section>
 
@@ -78,53 +126,4 @@
       </div>
     </div>
   </section>
-
-  <!-- Sidebar column (achievements + quick actions) mimicked as a stacked section for mobile) -->
-  <aside class="w-full">
-    <div class="max-w-[1200px] mx-auto w-full">
-      <div class="px-4 pt-4 pb-2">
-        <h3 class="text-[18px] font-bold text-[#121714]">Logros Recientes</h3>
-      </div>
-      <div class="h-[72px] flex items-center gap-4 px-4 py-2">
-        <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
-          <img src="/icons/cup.svg" alt="badge1" class="w-6 h-6" />
-        </div>
-        <div>
-          <div class="text-[16px] font-medium text-[#121714]">Reciclador Estrella</div>
-          <div class="text-[#618575] text-[14px]">10 kg de papel reciclado</div>
-        </div>
-      </div>
-      <div class="h-[72px] flex items-center gap-4 px-4 py-2">
-        <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
-          <img src="/icons/leaf.svg" alt="badge2" class="w-6 h-6" />
-        </div>
-        <div>
-          <div class="text-[16px] font-medium text-[#121714]">Eco-Guerrero</div>
-          <div class="text-[#618575] text-[14px]">5 recolecciones completadas</div>
-        </div>
-      </div>
-
-      <div class="px-4 pt-4 pb-2">
-        <h3 class="text-[18px] font-bold text-[#121714]">Acciones Rápidas</h3>
-      </div>
-      <div class="h-14 flex items-center gap-4 px-4">
-        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
-          <img src="/icons/plus-line.svg" alt="quick1" class="w-6 h-6" />
-        </div>
-        <div class="text-[16px] text-[#121714]">Programar Recolección</div>
-      </div>
-      <div class="h-14 flex items-center gap-4 px-4">
-        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
-          <img src="/icons/present.svg" alt="quick2" class="w-6 h-6" />
-        </div>
-        <div class="text-[16px] text-[#121714]">Ver Recompensas</div>
-      </div>
-      <div class="h-14 flex items-center gap-4 px-4">
-        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
-          <img src="/icons/comunity.svg" alt="quick3" class="w-6 h-6" />
-        </div>
-        <div class="text-[16px] text-[#121714]">Invitar Amigos</div>
-      </div>
-    </div>
-  </aside>
 </div>
