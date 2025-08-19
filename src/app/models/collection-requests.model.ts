@@ -9,6 +9,8 @@ export interface CollectionRequest {
   address_snapshot: string;
   status: 'pending' | 'assigned' | 'approved' | 'canceled';
   status_reason: string;
+  /** Present when approved/completed */
+  weight_kg?: string;
   notes: string;
   created_at: string;
   updated_at: string;
