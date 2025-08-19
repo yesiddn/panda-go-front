@@ -1,0 +1,65 @@
+<div class="flex items-center justify-center min-h-screen">
+  <div class="flex flex-col items-center gap-y-6 rounded-xl bg-white/10 p-8 shadow-lg ring-1 ring-black/5">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-gray-900">Crear solicitud de recolección</h2>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label for="collection_date" class="block text-sm font-medium text-gray-700">Fecha de recolección</label>
+        <p-datepicker id="collection_date" formControlName="collection_date" dateFormat="yy-mm-dd"
+          showIcon="true" [minDate]="minDate"></p-datepicker>
+        <div class="h-4">
+          @if (collection_date?.invalid && (collection_date?.dirty || collection_date?.touched)) {
+          <small class="text-red-500">La fecha de recolección es requerida</small>
+          }
+        </div>
+      </div>
+
+      <div>
+        <label for="address_snapshot" class="block text-sm font-medium text-gray-700">Dirección</label>
+        <input pInputText id="address_snapshot" formControlName="address_snapshot" />
+        <div class="h-4">
+          @if (address_snapshot?.invalid && (address_snapshot?.dirty || address_snapshot?.touched)) {
+          <small class="text-red-500">La dirección es requerida</small>
+          }
+        </div>
+      </div>
+
+      <div>
+        <label for="locality" class="block text-sm font-medium text-gray-700">Localidad</label>
+        <p-autoComplete id="locality" formControlName="locality" [suggestions]="filteredLocalities"
+          (completeMethod)="search($event)" field="name" [dropdown]="true" optionLabel="name"></p-autoComplete>
+        <div class="h-4">
+          @if (localityControl?.invalid && (localityControl?.dirty || localityControl?.touched)) {
+          <small class="text-red-500">La localidad es requerida</small>
+          }
+        </div>
+      </div>
+
+      <div>
+        <label for="waste_category" class="block text-sm font-medium text-gray-700">Categoría de residuo</label>
+        <p-select [options]="wasteCategories" formControlName="waste_category" optionLabel="name"
+          placeholder="Seleccionar categoría" class="w-full"></p-select>
+        <div class="h-4">
+          @if (waste_category?.invalid && (waste_category?.dirty || waste_category?.touched)) {
+          <small class="text-red-500">La categoría es requerida</small>
+          }
+        </div>
+      </div>
+
+      <div>
+        <label for="notes" class="block text-sm font-medium text-gray-700">Notas (opcional)</label>
+        <input pInputText id="notes" formControlName="notes" />
+      </div>
+
+      </div>
+      <div class="flex items-center gap-3">
+        <button pButton type="submit" label="Crear solicitud" [disabled]="form.invalid"></button>
+        <button pButton type="button" label="Cancelar" severity="secondary"
+          (click)="router.navigate(['/app'])"></button>
+      </div>
+    </form>
+  </div>
+</div>
