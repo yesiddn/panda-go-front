@@ -108,7 +108,7 @@
   <!-- Upcoming collections header -->
   <section class="w-full">
     <div class="max-w-[1200px] mx-auto px-4 pt-5 pb-3 flex items-center justify-between">
-      <h2 class="text-[22px] font-bold text-[#121714]">Próximas Recolecciones</h2>
+      <h2 class="text-[22px] font-bold text-[#121714]">Recollecciones Recientes</h2>
       <a routerLink="/app/requests/create" pButton label="Crear solicitud" icon="pi pi-plus" rounded="true"></a>
     </div>
   </section>
@@ -129,10 +129,12 @@
               {{ collectionRequest.collection_date | date:'fullDate' }} · {{ collectionRequest.route.start_time }} · {{ collectionRequest.route.company.name }}
             </div>
           </div>
-          <button class="h-8 rounded-2xl bg-[#ebf0ed] flex items-center gap-1 pl-4 pr-2">
-            <span class="text-[14px] font-medium text-[#121714]">Modificar</span>
-            <img src="/icons/pencil.svg" alt="edit" class="w-[18px] h-[18px]" />
-          </button>
+          @if (collectionRequest.status !== 'approved' && collectionRequest.status !== 'assigned') {
+            <button class="h-8 rounded-2xl bg-[#ebf0ed] flex items-center gap-1 pl-4 pr-2">
+              <span class="text-[14px] font-medium text-[#121714]">Modificar</span>
+              <img src="/icons/pencil.svg" alt="edit" class="w-[18px] h-[18px]" />
+            </button>
+          }
         </div>
       }
 
