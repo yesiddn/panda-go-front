@@ -10,7 +10,7 @@ export interface RouteRequest {
   start_time: string;
   end_time: string;
   notes: string;
-  waste_category: number;
+  waste_category_id: number;
   locality_id: number;
 }
 

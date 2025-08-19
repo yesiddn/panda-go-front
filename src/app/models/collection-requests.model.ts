@@ -15,7 +15,7 @@ export interface CollectionRequest {
   user: UserInfo;
   locality: number;
   waste_category: WasteCategory;
-  route: Route;
+  route?: Route;
 }
 
 export interface CreateCollectionRequestPayload {
@@ -23,5 +23,5 @@ export interface CreateCollectionRequestPayload {
   address_snapshot: string;
   notes: string;
   locality: number;
-  waste_category: number;
+  waste_category_id: number;
 }
