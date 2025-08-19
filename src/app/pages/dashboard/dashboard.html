@@ -109,7 +109,7 @@
   <section class="w-full">
     <div class="max-w-[1200px] mx-auto px-4 pt-5 pb-3 flex items-center justify-between">
       <h2 class="text-[22px] font-bold text-[#121714]">Recollecciones Recientes</h2>
-      <a routerLink="/app/requests/create" pButton label="Crear solicitud" icon="pi pi-plus" rounded="true"></a>
+      <a routerLink="/app/request/create" pButton label="Crear solicitud" icon="pi pi-plus" rounded="true"></a>
     </div>
   </section>
 
@@ -126,7 +126,7 @@
             <p-tag severity="info" [value]="collectionRequest.status" />
             <div class="text-[#121714] text-[16px] font-bold">{{ collectionRequest.waste_category.name }}</div>
             <div class="text-[#618575] text-[14px]">
-              {{ collectionRequest.collection_date | date:'fullDate' }} · {{ collectionRequest.route.start_time }} · {{ collectionRequest.route.company.name }}
+              {{ collectionRequest.collection_date | date:'fullDate' }} · {{ collectionRequest.route?.start_time || '-' }} · {{ collectionRequest.route?.company?.name || '-' }}
             </div>
           </div>
           @if (collectionRequest.status !== 'approved' && collectionRequest.status !== 'assigned') {
