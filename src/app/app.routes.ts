@@ -48,6 +48,10 @@ export const routes: Routes = [
         component: RoutesComponent
       },
       {
+        path: 'request/create',
+        loadComponent: () => import('./pages/colletion-requests/create-request/create-request').then(m => m.CreateRequest)
+      },
+      {
         path: 'routes/create',
         loadComponent: () => import('./pages/routes/create-route').then(m => m.CreateRouteComponent)
       },
