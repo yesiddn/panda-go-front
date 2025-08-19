@@ -1,0 +1,5 @@
+/* Minimal styles for create route form */
+
+:host {
+  display: block;
+}

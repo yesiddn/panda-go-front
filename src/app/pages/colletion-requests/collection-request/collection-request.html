@@ -1,0 +1,89 @@
+<div class="flex flex-col min-h-screen my-8">
+  <section class="w-full">
+    <div class="max-w-[1200px] mx-auto px-4 pt-5 pb-3 flex items-center justify-between">
+      <h2 class="text-[22px] font-bold text-[#121714]">Solicitudes de recolección</h2>
+      <a routerLink="/app/request/create" pButton label="Crear solicitud" icon="pi pi-plus" rounded="true"></a>
+    </div>
+  </section>
+
+  <section class="w-full mt-8">
+    <!-- Stats cards -->
+    <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <p-card header="Solicitudes semana actual">
+        <div class="text-3xl font-bold">{{ weekCount }}</div>
+        <small class="text-gray-500">Total de solicitudes registradas esta semana</small>
+      </p-card>
+      <p-card header="Solicitudes mes actual">
+        <div class="text-3xl font-bold">{{ monthCount }}</div>
+        <small class="text-gray-500">Total de solicitudes registradas este mes</small>
+      </p-card>
+      <p-card header="Solicitudes completadas este mes">
+        <div class="text-3xl font-bold">{{ monthCompletedCount }}</div>
+        <small class="text-gray-500">Completadas durante este mes</small>
+      </p-card>
+    </div>
+
+    <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <p-card header="Peso reciclado semana actual">
+        <div class="text-3xl font-bold">{{ weekWeight | number: '1.0-2' }} kg</div>
+        <small class="text-gray-500">Sólo solicitudes completadas</small>
+      </p-card>
+      <p-card header="Peso reciclado mes actual">
+        <div class="text-3xl font-bold">{{ monthWeight | number: '1.0-2' }} kg</div>
+        <small class="text-gray-500">Sólo solicitudes completadas</small>
+      </p-card>
+    </div>
+
+    <!-- Charts row -->
+    <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <p-card header="Distribución de estados (mes actual)">
+        <div>
+          <p-chart type="pie" [data]="statusChartData" [options]="statusChartOptions"></p-chart>
+        </div>
+      </p-card>
+      <p-card header="Peso reciclado mes a mes (últimos 6 meses)">
+        <div>
+          <p-chart type="bar" [data]="weightChartData" [options]="weightChartOptions"></p-chart>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Filter -->
+    <div class="max-w-[1200px] mx-auto mb-4 flex items-center gap-2">
+      <input pInputText type="text" placeholder="Buscar por dirección, categoría o estado" [(ngModel)]="filterText"
+        class="w-full" />
+    </div>
+
+    <!-- List/Table -->
+    @if (loading) {
+    <div class="max-w-[1200px] mx-auto">Cargando...</div>
+    } @else {
+    @if (filteredRequests.length === 0) {
+    <div class="max-w-[1200px] mx-auto text-center text-gray-500">No hay solicitudes para mostrar.</div>
+    } @else {
+    <div class="max-w-[1200px] mx-auto">
+      <p-table [value]="filteredRequests" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Fecha</th>
+            <th>Dirección</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Peso (kg)</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>{{ row.collection_date || row.request_date }}</td>
+            <td>{{ row.address_snapshot }}</td>
+            <td>{{ row.waste_category?.name }}</td>
+            <td><p-tag [severity]="severityFor(row.status)" [value]="row.status"></p-tag></td>
+            <td>{{ row.weight_kg || '-' }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    }
+    }
+  </section>
+</div>

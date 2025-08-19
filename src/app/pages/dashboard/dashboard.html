@@ -1,0 +1,146 @@
+<div class="flex flex-col min-h-screen my-8">
+  <!-- Hero card -->
+  <section class="w-full">
+    <div class="hero flex justify-center flex-col max-w-[1200px] min-h-64 mx-auto px-8 py-6 rounded-2xl">
+      <div class="ml-12">
+        <h1 class="text-white text-5xl font-black tracking-[-2px]">Hola, {{ userInfo?.first_name || 'Usuario' }}</h1>
+        @if (role === 'user') {
+          <p class="mt-2 text-white text-base">
+            Bienvenida a tu panel de control. Aquí puedes gestionar tus recolecciones y ver tus recompensas.
+          </p>
+          <a routerLink="/app/requests" pButton class="mt-10">
+            <span pButtonLabel>Ver mis solicitudes</span>
+          </a>
+        }
+        @else {
+          <p class="mt-2 text-white text-base">
+            Bienvenida a tu panel de control. Aquí puedes gestionar las rutas y recolecciones.
+          </p>
+          <a routerLink="/app/routes" pButton label="Ver rutas" rounded="true" class="mt-4"></a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats cards -->
+  <!-- <section class="w-full">
+    <div class="max-w-[1200px] mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="rounded-xl bg-[#ebf0ed] p-6">
+        <div class="text-[16px] font-medium text-[#121714]">Programadas</div>
+        <div class="text-[24px] font-bold text-[#121714]">3</div>
+        <div class="text-[16px] font-medium text-[#618575]">Esta semana</div>
+      </div>
+      <div class="rounded-xl bg-[#ebf0ed] p-6">
+        <div class="text-[16px] font-medium text-[#121714]">Completadas</div>
+        <div class="text-[24px] font-bold text-[#121714]">3</div>
+        <div class="text-[16px] font-medium text-[#618575]">Este mes</div>
+      </div>
+      <div class="rounded-xl bg-[#ebf0ed] p-6">
+        <div class="text-[16px] font-medium text-[#121714]">Total Reciclado</div>
+        <div class="text-[24px] font-bold text-[#121714]">10.1 kg</div>
+        <div class="text-[16px] font-medium text-[#618575]">Este mes</div>
+      </div>
+      <div class="rounded-xl bg-[#ebf0ed] p-6">
+        <div class="text-[16px] font-medium text-[#121714]">Puntos</div>
+        <div class="text-[24px] font-bold text-[#121714]">1.200</div>
+        <div class="text-[16px] font-medium text-[#618575]">Disponibles</div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Sidebar column (achievements + quick actions) mimicked as a stacked section for mobile) -->
+  <aside class="w-full flex gap-8 max-w-[1200px] mx-auto mt-8">
+    <div>
+      <div class="px-4 pt-4 pb-2">
+        <h3 class="text-[18px] font-bold text-[#121714]">Logros Recientes</h3>
+      </div>
+      <div class="h-[72px] flex items-center gap-4 px-4 py-2">
+        <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/cup.svg" alt="badge1" class="w-6 h-6" />
+        </div>
+        <div>
+          <div class="text-[16px] font-medium text-[#121714]">Reciclador Estrella</div>
+          <div class="text-[#618575] text-[14px]">10 kg de papel reciclado</div>
+        </div>
+      </div>
+      <div class="h-[72px] flex items-center gap-4 px-4 py-2">
+        <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/leaf.svg" alt="badge2" class="w-6 h-6" />
+        </div>
+        <div>
+          <div class="text-[16px] font-medium text-[#121714]">Eco-Guerrero</div>
+          <div class="text-[#618575] text-[14px]">5 recolecciones completadas</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="px-4 pt-4 pb-2">
+
+          <h3 class="text-[18px] font-bold text-[#121714]">Acciones Rápidas</h3>
+      </div>
+      <div class="h-14 flex items-center gap-4 px-4">
+        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/plus-line.svg" alt="quick1" class="w-6 h-6" />
+        </div>
+        @if (role === 'user') {
+          <div class="text-[16px] text-[#121714]">Programar Recolección</div>
+        }
+        @else {
+          <div class="text-[16px] text-[#121714]">Administrar Rutas</div>
+        }
+      </div>
+      <div class="h-14 flex items-center gap-4 px-4">
+        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/present.svg" alt="quick2" class="w-6 h-6" />
+        </div>
+        <div class="text-[16px] text-[#121714]">Ver Recompensas</div>
+      </div>
+      <div class="h-14 flex items-center gap-4 px-4">
+        <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/comunity.svg" alt="quick3" class="w-6 h-6" />
+        </div>
+        <div class="text-[16px] text-[#121714]">Invitar Amigos</div>
+      </div>
+      </div>
+  </aside>
+
+  <!-- Upcoming collections header -->
+  <section class="w-full">
+    <div class="max-w-[1200px] mx-auto px-4 pt-5 pb-3 flex items-center justify-between">
+      <h2 class="text-[22px] font-bold text-[#121714]">Recollecciones Recientes</h2>
+      <a routerLink="/app/request/create" pButton label="Crear solicitud" icon="pi pi-plus" rounded="true"></a>
+    </div>
+  </section>
+
+  <!-- Upcoming list -->
+  <section class="w-full">
+    <div class="max-w-[1200px] mx-auto p-4 space-y-4">
+      <!-- Item -->
+      @for (collectionRequest of collectionRequests; track $index) {
+        <div class="rounded-xl p-4 flex gap-4 items-start">
+          <div class="w-12 h-12 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
+          <img src="/icons/leaf.svg" alt="organic" class="w-6 h-6" />
+          </div>
+          <div class="flex-1">
+            <p-tag severity="info" [value]="collectionRequest.status" />
+            <div class="text-[#121714] text-[16px] font-bold">{{ collectionRequest.waste_category.name }}</div>
+            <div class="text-[#618575] text-[14px]">
+              {{ collectionRequest.collection_date | date:'fullDate' }} · {{ collectionRequest.route?.start_time || '-' }} · {{ collectionRequest.route?.company?.name || '-' }}
+            </div>
+          </div>
+          @if (collectionRequest.status !== 'approved' && collectionRequest.status !== 'assigned') {
+            <button class="h-8 rounded-2xl bg-[#ebf0ed] flex items-center gap-1 pl-4 pr-2">
+              <span class="text-[14px] font-medium text-[#121714]">Modificar</span>
+              <img src="/icons/pencil.svg" alt="edit" class="w-[18px] h-[18px]" />
+            </button>
+          }
+        </div>
+      }
+
+      <div class="px-4 pt-1 pb-3">
+        <span class="text-[#618575] text-[14px]">Ver Todas las Recolecciones</span>
+      </div>
+    </div>
+  </section>
+</div>

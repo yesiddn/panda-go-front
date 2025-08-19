@@ -1,0 +1,142 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold text-gray-900">Crear una cuenta</h1>
+      <p class="mt-2 text-sm text-gray-600">Completa el formulario para registrarte</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="space-y-6">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col gap-y-1">
+          <label for="first_name" class="block text-sm font-medium text-gray-700">Nombre</label>
+          <input pInputText id="first_name" formControlName="first_name" class="w-full"
+            [invalid]="first_name?.invalid && (first_name?.dirty || first_name?.touched)" />
+          <div class="h-4">
+            @if (first_name?.invalid && (first_name?.dirty || first_name?.touched)) {
+            <small class="text-red-500">
+              <span>El nombre es requerido</span>
+            </small>
+            }
+          </div>
+        </div>
+        <div class="flex flex-col gap-y-1">
+          <label for="last_name" class="block text-sm font-medium text-gray-700">Apellido</label>
+          <input pInputText id="last_name" formControlName="last_name" class="w-full"
+            [invalid]="last_name?.invalid && (last_name?.dirty || last_name?.touched)" />
+          <div class="h-4">
+            @if (last_name?.invalid && (last_name?.dirty || last_name?.touched)) {
+            <small class="text-red-500">
+              <span>El apellido es requerido</span>
+            </small>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="p-fluid">
+        <label for="username" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
+        <input pInputText id="username" formControlName="username" class="w-full"
+          [invalid]="username?.invalid && (username?.dirty || username?.touched)" />
+        <div class="h-4">
+          @if (username?.invalid && (username?.dirty || username?.touched)) {
+          <small class="text-red-500">
+            <span>El nombre de usuario es requerido</span>
+          </small>
+          }
+        </div>
+      </div>
+
+      <div class="p-fluid">
+        <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+        <input pInputText id="email" formControlName="email" class="w-full"
+          [invalid]="email?.invalid && (email?.dirty || email?.touched)" />
+        <div class="h-4">
+          @if (email?.invalid && (email?.dirty || email?.touched)) {
+          <small class="text-red-500">
+            @if (email?.errors?.['required']) {
+            <span>El correo electrónico es requerido</span>
+            }
+            @if (email?.errors?.['email']) {
+            <span>El correo electrónico no es válido</span>
+            }
+          </small>
+          }
+        </div>
+      </div>
+
+      <div class="p-fluid">
+        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+        <p-password id="password" formControlName="password" autocomplete="off" [toggleMask]="true"
+          [invalid]="password?.invalid && (password?.dirty || password?.touched)" class="w-full"
+          [inputStyle]="{'width':'100%'}">
+          <ng-template #header>
+            <div class="font-semibold text-xm mb-4">Requisitos de la contraseña</div>
+          </ng-template>
+          <ng-template #footer>
+            <p-divider />
+            <ul class="pl-2 my-0 leading-normal">
+              <li>Al menos una minúscula</li>
+              <li>Al menos una mayúscula</li>
+              <li>Al menos un número</li>
+              <li>Mínimo 8 caracteres</li>
+            </ul>
+          </ng-template>
+        </p-password>
+        <div class="h-4">
+          @if (password?.invalid && (password?.dirty || password?.touched)) {
+          <small class="text-red-500">
+            <span>La contraseña es requerida</span>
+          </small>
+          }
+        </div>
+      </div>
+
+      <div class="p-fluid">
+        <label for="password2" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
+        <p-password id="password2" formControlName="password2" autocomplete="off" [toggleMask]="true"
+          [invalid]="password2?.invalid && (password2?.dirty || password2?.touched)" class="w-full"
+          [inputStyle]="{'width':'100%'}"></p-password>
+        <div class="h-4">
+          @if (password2?.invalid && (password2?.dirty || password2?.touched)) {
+          <small class="text-red-500">
+            <span>La confirmación de la contraseña es requerida</span>
+          </small>
+          }
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-y-1">
+        <label for="locality_id" class="block text-sm font-medium text-gray-700">Localidad</label>
+        <p-autoComplete id="locality_id" formControlName="locality_id" [suggestions]="filteredLocalities"
+          (completeMethod)="search($event)" field="name" [dropdown]="true" optionLabel="name"
+          [invalid]="locality_id?.invalid && (locality_id?.dirty || locality_id?.touched)"></p-autoComplete>
+        <div class="h-4">
+          @if (locality_id?.invalid && (locality_id?.dirty || locality_id?.touched)) {
+          <small class="text-red-500">
+            <span>La localidad es requerida</span>
+          </small>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button pButton type="submit" label="Registrarse" class="w-full" [disabled]="registerForm.invalid"></button>
+      </div>
+
+      <!-- Global backend error message container (fixed height to avoid layout shift) -->
+      <div class="h-4 text-center" aria-live="polite">
+        @if (registrationError) {
+          <small class="text-red-500">{{ registrationError }}</small>
+        }
+      </div>
+
+      @if (!isEmployeeRegistration) {
+      <div class="text-sm text-center">
+        <a routerLink="/register-company" class="font-medium text-green-600 hover:text-green-500">
+          Registrarse como compañia recolectora
+        </a>
+      </div>
+      }
+    </form>
+  </div>
+</div>

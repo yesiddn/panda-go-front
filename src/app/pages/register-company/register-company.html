@@ -1,0 +1,51 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold text-gray-900">Registrar Empresa</h1>
+      <p class="mt-2 text-sm text-gray-600">Complete el formulario para registrar su empresa</p>
+    </div>
+
+    <form [formGroup]="companyForm" (ngSubmit)="createCompany()" class="space-y-6">
+      <div class="flex flex-col gap-y-1">
+        <label for="name" class="block text-sm font-medium text-gray-700">Nombre de la Empresa</label>
+        <input pInputText id="name" formControlName="name" class="w-full" [invalid]="companyForm.get('name')?.invalid && companyForm.get('name')?.touched" />
+        <div class="h-4">
+          @if (companyForm.get('name')?.invalid && companyForm.get('name')?.touched) {
+            <small class="text-red-500">
+              El nombre de la empresa es requerido.
+            </small>
+          }
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-y-1">
+        <label class="block text-sm font-medium text-gray-700">Categorías de Residuos</label>
+        <div class="grid grid-cols-2 gap-2 mt-2">
+          @for (category of wasteCategories; track $index) {
+            <div class="flex items-center">
+              <p-checkbox [value]="category.id" formControlName="waste_category_ids"></p-checkbox>
+              <label class="ml-2 text-sm text-gray-700">{{ category.name }}</label>
+            </div>
+          }
+        </div>
+        <div class="h-4">
+          @if (!companyForm.get('waste_category_ids')?.value) {
+            <small class="text-red-500">
+              Por favor, seleccione al menos una categoría.
+            </small>
+          }
+        </div>
+      </div>
+
+      @if (errorMessage) {
+        <div class="alert alert-danger mt-3">
+          <small class="text-red-500">
+            {{ errorMessage }}
+          </small>
+        </div>
+      }
+
+      <p-button type="submit" label="Crear Empresa y Añadir Empleado" styleClass="w-full" [disabled]="companyForm.invalid"></p-button>
+    </form>
+  </div>
+</div>
