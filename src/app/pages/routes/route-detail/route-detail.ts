@@ -20,6 +20,7 @@ export class RouteDetail {
   private readonly routesService = inject(RoutesService);
   private readonly collectionRequestService = inject(CollectionRequestService);
   private readonly route = inject(ActivatedRoute);
+  routeId: number | undefined;
 
   routeData: RouteModel | null = null;
   requests: CollectionRequest[] = [];
@@ -29,7 +30,9 @@ export class RouteDetail {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (!id) return;
 
-    this.routesService.getRoute(id).subscribe({
+    this.routeId = id;
+
+    this.routesService.getRoute(this.routeId).subscribe({
       next: (r) => {
         this.routeData = r;
       },

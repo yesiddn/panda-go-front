@@ -13,9 +13,10 @@
       </div>
       <div class="flex items-center justify-between mt-4 text-white">
         <div>
-          <div><strong>Inicio:</strong> {{ routeData?.start_time }} — <strong>Fin:</strong> {{ routeData?.end_time }}
+          <div class="mt-2"><strong>Localidad:</strong> {{ routeData?.locality?.name }}</div>
+          <div>
+            <strong>Inicio:</strong> {{ routeData?.start_time }} — <strong>Fin:</strong> {{ routeData?.end_time }}
           </div>
-          <div class="mt-2"><strong>Notas:</strong> {{ routeData?.notes || '—' }}</div>
         </div>
         @if (routeData?.status === 'planned') {
           <div class="">
@@ -40,13 +41,14 @@
           <img src="/icons/leaf.svg" alt="organic" class="w-6 h-6" />
         </div>
         <div class="flex-1 m-0">
+          <p-tag severity="info" [value]="collectionRequest.status === 'assigned' ? 'Asignada' : 'Completed'" />
           <div class="text-[#121714] text-[16px] font-bold">{{ collectionRequest.user.first_name }} {{ collectionRequest.user.last_name }}</div>
           <div class="text-[#618575] text-[14px]">
             {{ collectionRequest.address_snapshot }} · {{ collectionRequest.waste_category.name }}
           </div>
         </div>
-        @if (routeData?.status === 'in_progress') {
-          <a routerLink="/app/routes/request/{{ collectionRequest.id }}" pButton [rounded]="true" severity="success">
+        @if (routeData?.status === 'in_progress' && collectionRequest.status === 'assigned') {
+          <a [routerLink]="['/app/routes/request', collectionRequest.id]" [queryParams]="{ backTo: routeId }" pButton [rounded]="true" severity="success">
             <span pButtonLabel>Recolectar</span>
           </a>
         }
