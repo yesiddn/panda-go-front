@@ -1,4 +1,5 @@
 import { Company } from "./company.model";
+import { LocationInfo } from "./location-info.model";
 import { WasteCategory } from "./wasteCategories.model";
 
 export interface RouteRequest {
@@ -10,7 +11,7 @@ export interface RouteRequest {
   end_time: string;
   notes: string;
   waste_category: number;
-  locality: number;
+  locality_id: number;
 }
 
 export interface Route {
@@ -25,7 +26,7 @@ export interface Route {
   notes: string;
   waste_category: WasteCategory;
   company: Company;
-  locality: number;
+  locality: LocationInfo;
   created_at: string;
   updated_at: string;
 }
