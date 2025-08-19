@@ -15,7 +15,7 @@ export class Auth {
   private tokenService = inject(Token);
   private userInfoRequest$: Observable<UserInfo> | null = null;
   apiURL = environment.API_URL;
-  userInfo: UserInfo | null = null;
+  private userInfo: UserInfo | null = null;
 
   login(username: string, password: string) {
     return this.http.post<ResponseLogin>(`${this.apiURL}/token/`, { username: username, password }).pipe(
