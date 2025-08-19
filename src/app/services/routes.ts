@@ -31,4 +31,14 @@ export class RoutesService {
   deleteRoute(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${id}/`, { context: checkToken() });
   }
+
+  /** Mark a route as in_progress */
+  setInProgress(id: number): Observable<Route> {
+    return this.http.post<Route>(`${this.API_URL}/${id}/set-in-progress/`, {}, { context: checkToken() });
+  }
+
+  /** Mark a route as completed */
+  setCompleted(id: number): Observable<Route> {
+    return this.http.post<Route>(`${this.API_URL}/${id}/set-completed/`, {}, { context: checkToken() });
+  }
 }

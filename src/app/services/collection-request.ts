@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { CollectionRequest as CollectionRequestModel, CreateCollectionRequestPayload } from '../models/collection-requests.model';
+import { CollectionRequest, CollectionRequest as CollectionRequestModel, CreateCollectionRequestPayload } from '../models/collection-requests.model';
 import { checkToken } from '../interceptors/token.interceptor';
 
 @Injectable({
@@ -30,5 +30,18 @@ export class CollectionRequestService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${id}/`, { context: checkToken() });
+  }
+
+  /** Get collection requests that belong to a specific route */
+  getRequestsForRoute(routeId: number): Observable<CollectionRequest[]> {
+    return this.http.get<CollectionRequest[]>(`${this.API_URL}/route/${routeId}/`, { context: checkToken() }).pipe(
+      // si "address_snapshot" es un objeto, extraer "address"
+      map(requests => requests.map(req => ({
+        ...req,
+        address_snapshot: (req.address_snapshot && typeof req.address_snapshot === 'object' && 'address' in req.address_snapshot)
+          ? (req.address_snapshot as { address: string }).address
+          : req.address_snapshot
+      })))
+    )
   }
 }
