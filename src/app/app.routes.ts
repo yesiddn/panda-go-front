@@ -54,6 +54,10 @@ export const routes: Routes = [
       {
         path: 'routes/detail/:id',
         loadComponent: () => import('./pages/routes/route-detail/route-detail').then(m => m.RouteDetail)
+      },
+      {
+        path: 'routes/request/:id',
+        loadComponent: () => import('./pages/colletion-requests/complete-request/complete-request').then(m => m.CompleteRequest)
       }
     ]
   }
