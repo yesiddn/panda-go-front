@@ -27,7 +27,7 @@
                 </div>
               <div class="flex-1">
                 <p-tag severity="info" [value]="route.status === 'in_progress' ? 'In Progress' : route.status === 'planned' ? 'Planned' : 'Completed'" />
-                <div class="text-[#121714] text-lg font-bold mt-2">{{ route.route_code }}</div>
+                <div class="text-[#121714] text-lg font-bold mt-2">{{ route.route_code }} - {{ route.waste_category.name }}</div>
                 <div class="text-[#618575] text-sm mt-2">{{ route.route_date }} · {{ route.locality.name }}</div>
               </div>
               @if (route.status !== 'completed') {

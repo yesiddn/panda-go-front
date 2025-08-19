@@ -104,6 +104,7 @@ export class CreateRouteComponent {
     this.companiesService.getById(this.userInfo?.company_id).subscribe({
       next: (company) => {
         this.companyInfo = company;
+        this.wasteCategories = this.companyInfo?.waste_categories || [];
       },
       error: (err) => {
         console.error('Error loading company info', err);
@@ -148,7 +149,7 @@ export class CreateRouteComponent {
       start_time: raw.start_time ? this.formatTime(raw.start_time) : '',
       end_time: raw.end_time ? this.formatTime(raw.end_time) : '',
       notes: raw.notes || '',
-      waste_category: raw.waste_category && typeof raw.waste_category === 'object' ? raw.waste_category.id : raw.waste_category,
+      waste_category_id: raw.waste_category && typeof raw.waste_category === 'object' ? raw.waste_category.id : raw.waste_category,
       locality_id: raw.locality && typeof raw.locality === 'object' ? raw.locality.id : raw.locality
     };
     console.log('Creating route with payload:', payload);
