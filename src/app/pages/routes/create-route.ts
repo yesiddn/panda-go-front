@@ -122,7 +122,24 @@ export class CreateRouteComponent {
         console.error('Error loading waste categories', err);
       }
     });
-
+    // Load company info and waste categories in parallel, then filter once
+    import { forkJoin } from 'rxjs';
+    forkJoin({
+      company: this.companiesService.getById(this.userInfo?.company_id),
+      wasteCategories: this.wasteCategoriesService.getAll()
+    }).subscribe({
+      next: ({ company, wasteCategories }) => {
+        this.companyInfo = company;
+        // Filter waste categories based on company info
+        const allowedIds = company?.waste_categories?.map(cat => cat.id) || [];
+        this.wasteCategories = wasteCategories.filter(wasteCategory =>
+          allowedIds.includes(wasteCategory.id)
+        );
+      },
+      error: (err) => {
+        console.error('Error loading company info or waste categories', err);
+      }
+    });
     // load localities
     this.localityService.getAll().subscribe({
       next: (localities) => {
