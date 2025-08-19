@@ -62,6 +62,10 @@ export const routes: Routes = [
       {
         path: 'routes/request/:id',
         loadComponent: () => import('./pages/colletion-requests/complete-request/complete-request').then(m => m.CompleteRequest)
+      },
+      {
+        path: 'requests',
+        loadComponent: () => import('./pages/colletion-requests/collection-request/collection-request').then(m => m.CollectionRequestPage)
       }
     ]
   }
