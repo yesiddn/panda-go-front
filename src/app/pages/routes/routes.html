@@ -26,14 +26,16 @@
                   <img src="/icons/leaf.svg" alt="organic" class="w-6 h-6" />
                 </div>
               <div class="flex-1">
-                <p-tag severity="info" [value]="route.status" />
+                <p-tag severity="info" [value]="route.status === 'in_progress' ? 'In Progress' : route.status === 'planned' ? 'Planned' : 'Completed'" />
                 <div class="text-[#121714] text-lg font-bold mt-2">{{ route.route_code }}</div>
-                <div class="text-[#618575] text-sm mt-2">{{ route.route_date }}</div>
+                <div class="text-[#618575] text-sm mt-2">{{ route.route_date }} · {{ route.locality.name }}</div>
               </div>
-              <a routerLink="/app/routes/create" pButton icon="pi pi-plus" rounded="true" severity="secondary">
-                <span pButtonLabel class="text-[14px] font-medium text-[#121714]">Modificar</span>
-                <img pButtonIcon src="/icons/pencil.svg" alt="edit" class="w-[18px] h-[18px]" />
-              </a>
+              @if (route.status !== 'completed') {
+                <a routerLink="/app/routes/create" pButton icon="pi pi-plus" rounded="true" severity="secondary">
+                  <span pButtonLabel class="text-[14px] font-medium text-[#121714]">Modificar</span>
+                  <img pButtonIcon src="/icons/pencil.svg" alt="edit" class="w-[18px] h-[18px]" />
+                </a>
+              }
             </div>
           </a>
         }
