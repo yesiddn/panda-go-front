@@ -44,4 +44,9 @@ export class CollectionRequestService {
       })))
     )
   }
+
+  /** Approve a collection request with reason and weight */
+  approve(id: number, payload: { status_reason: string; weight_kg: string }): Observable<CollectionRequestModel> {
+    return this.http.post<CollectionRequestModel>(`${this.API_URL}/${id}/approve/`, payload, { context: checkToken() });
+  }
 }
