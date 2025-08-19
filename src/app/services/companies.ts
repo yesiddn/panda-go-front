@@ -16,6 +16,6 @@ export class Companies {
   getById(id: number): Observable<Company | undefined> {
     return this.http.get<Company>(`${this.apiURL}/companies/${id}/`).pipe(
       map(company => company)
-    );
+    return this.http.get<Company>(`${this.apiURL}/companies/${id}/`);
   }
 }
