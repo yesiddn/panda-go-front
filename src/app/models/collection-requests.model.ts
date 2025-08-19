@@ -1,3 +1,4 @@
+import { UserInfo } from "./auth.model";
 import { Route } from "./routes.model";
 import { WasteCategory } from "./wasteCategories.model";
 
@@ -11,7 +12,7 @@ export interface CollectionRequest {
   notes: string;
   created_at: string;
   updated_at: string;
-  user: number;
+  user: UserInfo;
   locality: number;
   waste_category: WasteCategory;
   route: Route;
