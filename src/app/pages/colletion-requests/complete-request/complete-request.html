@@ -1,0 +1,34 @@
+<div class="flex items-center justify-center min-h-screen">
+  <div class="flex flex-col items-center gap-y-6 rounded-xl bg-white/10 p-8 shadow-lg ring-1 ring-black/5">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-gray-900">Completar solicitud de recolección</h2>
+    </div>
+
+    <form (ngSubmit)="submit()" [formGroup]="form" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Peso (kg)</label>
+          <input pInputText formControlName="weight_kg" type="number" class="w-full" />
+          <div class="h-4">
+            @if (weight_kg?.invalid && (weight_kg?.dirty || weight_kg?.touched)) {
+            <small class="text-red-500">
+              <span>El peso es requerido</span>
+            </small>
+            }
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Razón de estado</label>
+          <input pInputText formControlName="status_reason" type="text" class="w-full" />
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button pButton type="submit" label="Completar"></button>
+        <!-- <button pButton type="button" label="Cancelar" severity="secondary"
+          (click)="router.navigate(['/app/routes'])"></button> -->
+      </div>
+    </form>
+  </div>
+</div>
