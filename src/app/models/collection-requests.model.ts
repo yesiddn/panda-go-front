@@ -17,13 +17,6 @@ export interface CollectionRequest {
   route: Route;
 }
 
-// {
-//   "collection_date": "2025-08-19",
-//   "address_snapshot": "string",
-//   "notes": "string",
-//   "locality": 0,
-//   "waste_category": 0
-// }
 export interface CreateCollectionRequestPayload {
   collection_date: string;
   address_snapshot: string;
