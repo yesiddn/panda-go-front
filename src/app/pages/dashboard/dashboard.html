@@ -4,11 +4,20 @@
     <div class="hero flex justify-center flex-col max-w-[1200px] min-h-64 mx-auto px-8 py-6 rounded-2xl">
       <div class="ml-12">
         <h1 class="text-white text-5xl font-black tracking-[-2px]">Hola, {{ userInfo?.first_name || 'Usuario' }}</h1>
-        <p class="mt-2 text-white text-base">Bienvenida a tu panel de control. Aquí puedes gestionar tus recolecciones y
-          ver tus recompensas.</p>
-        <a routerLink="/app" pButton class="mt-10">
-          <span pButtonLabel>Ver recompensas</span>
-        </a>
+        @if (role === 'user') {
+          <p class="mt-2 text-white text-base">
+            Bienvenida a tu panel de control. Aquí puedes gestionar tus recolecciones y ver tus recompensas.
+          </p>
+          <a routerLink="/app" pButton class="mt-10">
+            <span pButtonLabel>Ver recompensas</span>
+          </a>
+        }
+        @else {
+          <p class="mt-2 text-white text-base">
+            Bienvenida a tu panel de control. Aquí puedes gestionar las rutas y recolecciones.
+          </p>
+          <a routerLink="/app/routes" pButton label="Ver rutas" rounded="true" class="mt-4"></a>
+        }
       </div>
     </div>
   </section>
@@ -67,13 +76,19 @@
 
     <div>
       <div class="px-4 pt-4 pb-2">
-        <h3 class="text-[18px] font-bold text-[#121714]">Acciones Rápidas</h3>
+
+          <h3 class="text-[18px] font-bold text-[#121714]">Acciones Rápidas</h3>
       </div>
       <div class="h-14 flex items-center gap-4 px-4">
         <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
           <img src="/icons/plus-line.svg" alt="quick1" class="w-6 h-6" />
         </div>
-        <div class="text-[16px] text-[#121714]">Programar Recolección</div>
+        @if (role === 'user') {
+          <div class="text-[16px] text-[#121714]">Programar Recolección</div>
+        }
+        @else {
+          <div class="text-[16px] text-[#121714]">Administrar Rutas</div>
+        }
       </div>
       <div class="h-14 flex items-center gap-4 px-4">
         <div class="w-10 h-10 rounded-lg bg-[#ebf0ed] flex items-center justify-center">
