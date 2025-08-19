@@ -7,7 +7,7 @@ export interface CollectionRequest {
   request_date: string;
   collection_date: string;
   address_snapshot: string;
-  status: 'pending' | 'confirmed' | 'canceled';
+  status: 'pending' | 'assigned' | 'approved' | 'canceled';
   status_reason: string;
   notes: string;
   created_at: string;
